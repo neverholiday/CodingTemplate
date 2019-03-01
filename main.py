@@ -2,6 +2,7 @@
 **DEVELOPER**
 **DESCRIPTION**
 **NUM_REQ_ARGUMENT**
+**USAGE**
 #!/usr/bin/env python
 #
 # Copyright (C) **YEAR**  FIBO/KMUTT
@@ -62,7 +63,7 @@ NUM_REQUIRE_ARGUMENT = **NUM_REQ_ARGUMENT**
 def main():
 	
 	#	define usage of programing
-	programUsage = "python %prog arg [option] " + str( VERSIONNUMBER ) + ', Copyright (C) **YEAR** FIBO/KMUTT'
+	programUsage = "python %prog arg [option] {} ".format( **USAGE** ) + str( VERSIONNUMBER ) + ', Copyright (C) **YEAR** FIBO/KMUTT'
 
 	#	initial parser instance
 	parser = optparse.OptionParser( usage = programUsage, description=PROGRAM_DESCRIPTION )
