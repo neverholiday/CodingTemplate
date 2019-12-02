@@ -2,7 +2,7 @@
 **DEVELOPER**
 #!/usr/bin/env python
 #
-# Copyright (C) **YEAR**  FIBO/KMUTT
+# Copyright (C) **YEAR** NeverHoliday
 #			Written by **DEVELOPER**
 #
 
