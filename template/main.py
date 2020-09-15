@@ -57,7 +57,7 @@ NUM_REQUIRE_ARGUMENT = {NUM_REQ_ARGUMENT}
 def main():
 	
 	#	define usage of programing
-	programUsage = "python %prog arg [option] {} ".format( "{USAGE}" ) + str( VERSIONNUMBER ) + ', Copyright (C) **YEAR** FIBO/KMUTT'
+	programUsage = "python %prog arg [option] {{}}".format( "{USAGE}" ) + str( VERSIONNUMBER ) + ', Copyright (C) {YEAR}'
 
 	#	initial parser instance
 	parser = optparse.OptionParser( usage = programUsage, description=PROGRAM_DESCRIPTION )
@@ -73,7 +73,7 @@ def main():
 	if len( args ) != NUM_REQUIRE_ARGUMENT:	
 		
 		#	raise error from parser
-		parser.error( "require {} argument(s)".format( NUM_REQUIRE_ARGUMENT ) )
+		parser.error( "require {{}} argument(s)".format( NUM_REQUIRE_ARGUMENT ) )
 	
 
 	#########################################################

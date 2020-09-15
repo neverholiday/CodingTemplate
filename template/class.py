@@ -34,4 +34,7 @@
 #	CLASS DEFINITIONS
 #
 
-
+class {CLASSNAME}( {PARENTCLASSNAME} ):
+	''' {CLASSNAME} 
+	'''
+	pass
