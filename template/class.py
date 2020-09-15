@@ -1,18 +1,13 @@
-**YEAR**
-**DEVELOPER**
-#!/usr/bin/env python
+#!/usr/bin/env python{PYTHONVERSION}
 #
-# Copyright (C) **YEAR** NeverHoliday
-#			Written by **DEVELOPER**
+# Copyright (C) {YEAR}
+#			Written by {DEVELOPER}
 #
 
 ########################################################
 #
 #	STANDARD IMPORTS
 #
-
-import sys
-import os
 
 ########################################################
 #

@@ -1,16 +1,11 @@
-**YEAR**
-**DEVELOPER**
-**DESCRIPTION**
-**NUM_REQ_ARGUMENT**
-**USAGE**
-#!/usr/bin/env python
+#!/usr/bin/env python{PYTHONVERSION}
 #
-# Copyright (C) **YEAR** NeverHoliday
-#			Written by **DEVELOPER**
+# Copyright (C) {YEAR}
+#			Written by {DEVELOPER}
 #
 
 VERSIONNUMBER = 'v1.0'
-PROGRAM_DESCRIPTION = "**DESCRIPTION**"
+PROGRAM_DESCRIPTION = "{DESCRIPTION}"
 
 ########################################################
 #
@@ -33,7 +28,7 @@ import optparse
 #
 #	Standard globals
 #
-NUM_REQUIRE_ARGUMENT = **NUM_REQ_ARGUMENT**
+NUM_REQUIRE_ARGUMENT = {NUM_REQ_ARGUMENT}
 
 ########################################################
 #
@@ -44,7 +39,6 @@ NUM_REQUIRE_ARGUMENT = **NUM_REQ_ARGUMENT**
 #
 #	Helper functions
 #
-
 
 ########################################################
 #
@@ -63,7 +57,7 @@ NUM_REQUIRE_ARGUMENT = **NUM_REQ_ARGUMENT**
 def main():
 	
 	#	define usage of programing
-	programUsage = "python %prog arg [option] {} ".format( "**USAGE**" ) + str( VERSIONNUMBER ) + ', Copyright (C) **YEAR** FIBO/KMUTT'
+	programUsage = "python %prog arg [option] {} ".format( "{USAGE}" ) + str( VERSIONNUMBER ) + ', Copyright (C) **YEAR** FIBO/KMUTT'
 
 	#	initial parser instance
 	parser = optparse.OptionParser( usage = programUsage, description=PROGRAM_DESCRIPTION )
