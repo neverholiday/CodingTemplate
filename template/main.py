@@ -17,7 +17,6 @@ import os
 
 import optparse
 
-
 ########################################################
 #
 #	LOCAL IMPORTS
@@ -57,7 +56,7 @@ NUM_REQUIRE_ARGUMENT = {NUM_REQ_ARGUMENT}
 def main():
 	
 	#	define usage of programing
-	programUsage = "python %prog arg [option] {{}}".format( "{USAGE}" ) + str( VERSIONNUMBER ) + ', Copyright (C) {YEAR}'
+	programUsage = "python %prog arg [option] <args> " + str( VERSIONNUMBER ) + ', Copyright (C) {YEAR}'
 
 	#	initial parser instance
 	parser = optparse.OptionParser( usage = programUsage, description=PROGRAM_DESCRIPTION )
@@ -74,13 +73,13 @@ def main():
 		
 		#	raise error from parser
 		parser.error( "require {{}} argument(s)".format( NUM_REQUIRE_ARGUMENT ) )
-	
+		sys.exit( -1 )
 
 	#########################################################
 	#
 	#		get option and argument
 	#
-	arg1 = args[ 0 ]
+	argList = list( args )
 	myOption = options.myOption
 	
 

@@ -80,8 +80,6 @@ class TemplateGenerator( object ):
 			print( 'Unable to read file, file {} is not found'.format( templateFile ) )
 			return
 
-		print( attributeToValueDict )
-
 		#	Substution value from attribute to value dict
 		try:
 			generateTxt = templateContent.format( **attributeToValueDict )

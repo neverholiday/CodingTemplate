@@ -17,7 +17,6 @@ import os
 
 import optparse
 
-
 ########################################################
 #
 #	LOCAL IMPORTS
@@ -103,7 +102,6 @@ class MainGenerator( object ):
 		'''	Run!!!
 		'''
 		dataDict = self.parameterObject.getAttributeDict()
-		print( dataDict )
 		TemplateGenerator.generateTemplateFile( self.fileName, self.templatePath, dataDict )
 
 	
@@ -124,6 +122,9 @@ def main():
 
 	if len( args ) < 2:
 		print( 'Usage ./generate_template.py <generatorType> <fileName>' )
+		print( 'Generator type available : ' )
+		for genType in MainGenerator.GeneratorTypeToTemplateFile:
+			print( '\t-> {}'.format( genType ) )
 		return
 
 	#	Get argument 
