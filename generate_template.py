@@ -29,7 +29,7 @@ from TemplateGenerator import TemplateGenerator
 #
 #	Standard globals
 #
-NUM_REQUIRE_ARGUMENT = 2
+NUM_REQUIRE_ARGUMENT = 1
 
 ########################################################
 #
@@ -53,22 +53,23 @@ class MainGenerator( object ):
 	class TemplateGeneratorType:
 		PythonClass = 'python-class'
 		PythonMain = 'python-main'
+		CplusplusClass = 'cpp-class'
+		CplusplusHeader = 'cpp-header'
 
 	#	Mapping dict of generator type to template
 	GeneratorTypeToTemplateFile = {
 		TemplateGeneratorType.PythonClass : TemplateFileConfigureDict.PythonClassTemplatePath,
-		TemplateGeneratorType.PythonMain : TemplateFileConfigureDict.PythonMainTemplatePath
+		TemplateGeneratorType.PythonMain : TemplateFileConfigureDict.PythonMainTemplatePath,
+		TemplateGeneratorType.CplusplusClass : TemplateFileConfigureDict.CplusplusClassTemplatePath,
+		TemplateGeneratorType.CplusplusHeader : TemplateFileConfigureDict.CplusplusHeaderTemplatePath
 	}
 
-	def __init__( self, generatorType, fileName ):
+	def __init__( self, generatorType ):
 		'''	Initial, set generator type when constuct this object
 		'''
 
 		#	Set generator
 		self.generatorType = generatorType
-
-		#	Set fileName
-		self.fileName = fileName
 
 		#	Get template path
 		self.templatePath = MainGenerator.GeneratorTypeToTemplateFile[ generatorType ]
@@ -88,21 +89,30 @@ class MainGenerator( object ):
                   action="store", type="string", dest=attrName, default=val,
 				  help='Default of {} is {!r}'.format( attrName, val ) )
 
-	def constructOptionsDict( self, options ):
+	def constructOptionsDict( self, fileName, options ):
 		'''	Construct dict from options object
 		'''	
 
+		#	Get only file name of path
+		baseFileName = os.path.split( fileName )[ 1 ]
+		beseFileNameNoExt = os.path.splitext( baseFileName )[ 0 ]
+
+		#	Add file to object
 		defaultDict = self.parameterObject.getAttributeDict()
 
 		for key in defaultDict:
 			val = getattr( options, key )
 			self.parameterObject.setValueToAttribute( key, val )
+		
+		self.parameterObject.addAttributeValue( TemplateFileConfigureDict.FileNameFieldName, beseFileNameNoExt )
 
-	def run( self ):
+	def run( self, fileName ):
 		'''	Run!!!
 		'''
+		
+		#	Get default attribute in dict and update default file name
 		dataDict = self.parameterObject.getAttributeDict()
-		TemplateGenerator.generateTemplateFile( self.fileName, self.templatePath, dataDict )
+		TemplateGenerator.generateTemplateFile( fileName, self.templatePath, dataDict )
 
 	
 
@@ -117,21 +127,9 @@ class MainGenerator( object ):
 #	
 def main():
 
-	#	Get raw argument from sys
-	args = list( sys.argv[ 1 : ] )
+	generatorType = 'python-main'
 
-	if len( args ) < 2:
-		print( 'Usage ./generate_template.py <generatorType> <fileName>' )
-		print( 'Generator type available : ' )
-		for genType in MainGenerator.GeneratorTypeToTemplateFile:
-			print( '\t-> {}'.format( genType ) )
-		return
-
-	#	Get argument 
-	generatorType = args[ 0 ]
-	fileName = args[ 1 ]
-
-	mainGenerator = MainGenerator( generatorType, fileName )
+	mainGenerator = MainGenerator( generatorType )
 	
 	#	initial parser instance
 	parser = optparse.OptionParser()
@@ -141,9 +139,18 @@ def main():
 
 	( options, args ) = parser.parse_args()
 
-	mainGenerator.constructOptionsDict( options )
+	#	check number of argument from NUM_REQUIRE_ARGUMENT
+	if len( args ) != 1:	
+		
+		#	raise error from parser
+		parser.error( "require {} argument(s)".format( NUM_REQUIRE_ARGUMENT ) )
+		sys.exit( -1 )
 
-	mainGenerator.run()
+	fileName = args[0]
+
+	mainGenerator.constructOptionsDict( fileName, options )
+
+	mainGenerator.run( fileName )
 
 ########################################################
 #

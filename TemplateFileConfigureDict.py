@@ -9,6 +9,8 @@
 #	STANDARD IMPORTS
 #
 
+from datetime import datetime
+
 ########################################################
 #
 #	LOCAL IMPORTS
@@ -28,6 +30,25 @@
 #
 #	HELPER FUNCTIONS
 #
+
+
+def getCurrentYearStringFormat():
+	'''	Function to get current year with string format
+
+		@rtype string : current year with string format 
+	'''
+	currentDateTime = datetime.now()
+	year = currentDateTime.year
+	return str( year )
+
+def getCurrentMonthStringFormat():
+	'''	Function to get current month with string format
+	
+		@rtype string : current month with string format
+	'''
+	currentDateTime = datetime.now()
+	month = currentDateTime.month
+	return str( month )
 
 ########################################################
 #
@@ -66,29 +87,45 @@ class ParameterObject( object ):
 		#	Update value
 		self.__dict__[ attrName ] = value
 
+	def addAttributeValue( self, attrName, value ):
+
+		assert attrName not in self.__dict__, 'attrName {} already in __dict__'.format( attrName ) 
+		self.__dict__[ attrName ] = value
+
 class TemplateFileConfigureDict( object ):
 	''' Object to store dictionary of file template to variable dict
 	'''
 
 	PythonClassTemplatePath = 'template/class.py'
 	PythonMainTemplatePath = 'template/main.py'
+	CplusplusClassTemplatePath = 'template/classdef.c++'
+	CplusplusHeaderTemplatePath = 'template/classheader.h'
+
+	FileNameFieldName = 'FILENAME'
 	
 	TemplateFileToParameterObjectDict = {
 
 		#	Python class template python		
 		PythonClassTemplatePath : ParameterObject( PYTHONVERSION='', \
-													YEAR='2020', \
+													YEAR=getCurrentYearStringFormat(), \
 													DEVELOPER='Nasrun (Nas) Hayeeyama',
-													CLASSNAME='',
 													PARENTCLASSNAME='object' ),
 
 		#	Python main template python									
 		PythonMainTemplatePath : ParameterObject( PYTHONVERSION='', \
-													YEAR='2020', \
+													YEAR=getCurrentYearStringFormat(), \
 													DEVELOPER='Nasrun (Nas) Hayeeyama', \
 													NUM_REQ_ARGUMENT='0', \
 													DESCRIPTION='', \
-													USAGE='' )
+													USAGE='' ),
+		
+		#	c++ class template python									
+		CplusplusClassTemplatePath : ParameterObject( YEAR=getCurrentYearStringFormat(), \
+													DEVELOPER='Nasrun (Nas) Hayeeyama' ),
+
+		#	c++ header template python									
+		CplusplusHeaderTemplatePath : ParameterObject( YEAR=getCurrentYearStringFormat(), \
+													DEVELOPER='Nasrun (Nas) Hayeeyama' )
 
 	}
 
