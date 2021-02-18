@@ -56,7 +56,7 @@ NUM_REQUIRE_ARGUMENT = {NUM_REQ_ARGUMENT}
 def main():
 	
 	#	define usage of programing
-	programUsage = "python %prog arg [option] <args> " + str( VERSIONNUMBER ) + ', Copyright (C) {YEAR}'
+	programUsage = "%prog [option] <args> " + str( VERSIONNUMBER ) + ', Copyright (C) {YEAR}'
 
 	#	initial parser instance
 	parser = optparse.OptionParser( usage = programUsage, description=PROGRAM_DESCRIPTION )

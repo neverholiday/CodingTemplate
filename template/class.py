@@ -34,7 +34,7 @@
 #	CLASS DEFINITIONS
 #
 
-class {CLASSNAME}( {PARENTCLASSNAME} ):
-	''' {CLASSNAME} 
+class {FILENAME}( {PARENTCLASSNAME} ):
+	''' {FILENAME} 
 	'''
 	pass
